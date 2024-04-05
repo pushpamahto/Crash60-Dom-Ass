@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        input {
+            margin-bottom: 10px;
+            align-items: center;
+            margin: auto;
+        }
+        h1{
+            /* text-align: center; */
+            font-size:50px;
+            font-weight: bolder;
+        }
+        
+
+
+    </style>
+</head>
+<body>
+    <h1>BMI Calculator</h1>
+
+    <h3>Enter your weight and height below to check your BMI results</h3>
+    
+    <h3>Put your weight in here (KG)</h3>
+    
+    <label for="weight">Enter Weight (KG): </label>
+    <input type="number" id="weight"><br>
+
+    <h3>And your height in here (CM)</h3>
+
+    <label for="height">Enter Height (CM): </label>
+    <input type="number" id="height"><br>
+
+    <button onclick="calculateBMI()">Calculate BMI</button><br>
+
+    <h2>Result:</h2>
+    <div id="result"></div>
+
+    <script>
+        function calculateBMI() {
+            let weight = document.getElementById('weight').value;
+            let height = document.getElementById('height').value;
+
+            if (weight === "" || height === "" || weight <= 0 || height <= 0) {
+
+                document.getElementById('result').innerHTML = 'Please enter valid weight and height.';
+                return;
+            }
+
+            weight = Number(weight);
+            height = Number(height) / 100; // Convert height to meters
+
+            let bmi = weight / (height * height);
+            let resultText;
+
+            if (bmi <= 18.4) {
+                resultText = 'Underweight';
+            } else if (bmi >= 18.5 && bmi <= 24.9) {
+                resultText = 'Normal Weight';
+            } else if (bmi >= 25 && bmi <= 29.9) {
+                resultText = 'Overweight';
+            } else {
+                resultText = 'Obese';
+            }
+
+            document.getElementById('result').innerHTML = 'Your BMI is ' + bmi.toFixed(2) + 'which means you are ' + resultText + '.';
+        }
+    </script>
+</body>
+</html>
